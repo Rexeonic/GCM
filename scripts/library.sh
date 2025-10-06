@@ -37,7 +37,7 @@ check_config() {
 
     local key=$1
     local key1=$2
-    
+
     # Test (after testing remove comments)
    # key=`git config --get "${key}"`
    # key1=`git config --get "${key1}"`

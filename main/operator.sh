@@ -5,7 +5,6 @@
 
 COMMENT_BLOCK
 
-exec 3<>.controller 
 echo 'Loading Menu'
 
 # main loop
@@ -18,7 +17,6 @@ while [ 1 ]; do
       # If user wants to exit, exit the program
       if [ "${?}" -eq 24 ]; then
 
-        exec 3>&- # Close .controller
         exit 0  # Task Completed Successfully
 
       fi

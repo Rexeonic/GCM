@@ -10,24 +10,18 @@ if [[ -x "${HOME}/gcm/scripts/library.sh" ]]; then
 fi
 
 clone() {
-  true
+  ( : )
 }
 
 local_config() {
-  true
+  ( : )
 }
 
-check_config 'user.name' 'user.email'
+#check_config 'user.name' 'user.email'
 
-#while [ 1 ]; do
-
-  # Make a form (this cmd isn't working)
-  dialog --form "Setup Repository" 12 40 4 \
-    "Username: " --default-item "$(sed -n '1p' "${HOME}/gcm/.controller")" 1 1 \
-    "Email: " --default-item "$(sed -n '2p' "${HOME}/gcm/.controller")" 3 12 15 \
-         "Token: " 3 12 15 0 \
-         --clear
-
-#done
+"${HOME}/gcm/scripts/login-menu.sh"
+if [ "${?}" -eq 24]; then # user trying to exit
+  exit 24
+fi
 # Project Setted-up Successfully
 exit 0
