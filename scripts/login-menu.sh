@@ -2,6 +2,11 @@
 
 <<COMMENT_BLOCK
 
+  Dialog utility have some bugs in dialog form box.
+  Hence be carefully making changes to the form function and the main
+  while loop (infinite loop) in this file.
+  Every feature is bug-free in the GCM plugin-in 
+  by working around the bugs of dialog tool.
 
 COMMENT_BLOCK
 
@@ -44,7 +49,7 @@ form() {
 
   # Enter user and email_id
   local login_info=$(dialog \
-                      --ok-label "Set Scope" \
+                      --ok-label "Next" \
                       --nocancel \
                       --backtitle "Set your account's default identity" \
                       --cursor-off-label  \
@@ -61,18 +66,16 @@ form() {
   email_id=$( echo "${login_info}" | sed -n '2p' )
 
 
-  #set_author_identity "${username}" "${email_id}" "${scope:='local'}"
 }
 
 scope_radiolist() {
-  # Select Config to write to (i.e scope )
 
   exec 3>&1
 
   # --nocancel to remove button
   scope=$(dialog \
                        --ok-label "Confirm" \
-                       --cancel-label "Exit (without save)" \
+                       --cancel-label "back" \
                        --cursor-off-label \
                        --clear \
                        --radiolist "Scope" 13 20 4 \
@@ -128,8 +131,7 @@ while [ 1 ]; do
 
   # Call Dialog menu
   form
-
-  while [ "${?}" -eq 0 ]; do
+  while [ 1 ]; do
 
     scope_radiolist
     if [[ "${?}" -eq 0 ]]; then
@@ -141,13 +143,13 @@ while [ 1 ]; do
         set_author_identity "${username}" "${email_id}" "--${scope}"
         exit 0  # Author authentication successfully done..
       else
-        exit 42  # User exited without saving changes
+        exit 24  # User exited without saving changes
       fi
     else
-      break 2  # Breaks the infinite while loop
+      #break 2  # Breaks the outer infinite while loop
+      break 1  # Break the inner infinite while loop
     fi
   done
-
 done
 
 clear
