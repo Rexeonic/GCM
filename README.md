@@ -10,8 +10,9 @@ Highlights
 <ul type="disc">
  <li> Integrity -  protect yourself from typos while writing commands </li>
  <li> TUI -  Terminal User Interface to make development colorful </li>
- <li> Configure - written purely in Bash so anyone can bend GCM to their<br>
+ <li> Configure - written purely in Bash so anyone can bend GCM to their
                needs. </li>
+ <li> Updates - Regularly check for updates in remote or upstream repository</li>
 </ul>
 
 Table of Contents
@@ -19,7 +20,7 @@ Table of Contents
 
 <ul type="disc">
     <li> Installation</li>
-     Usage
+    <li>Usage</li>
     <li> Examples</li>
     <li>
         Architecture
@@ -55,14 +56,14 @@ Examples
 Architecture
 ---------------------------------------------------------------------
 
-<h2>Design</h2>
+<h3>Design</h3>
 
 
-<h2>Debugging Information</h2>
+<h3>Debugging Information</h3>
 
-<h3>Error Codes</h3>
+<h4>Error Codes</h4>
 <ol>
-    <li>0 -> Operation performed successfully.</li>
+    <li>0  -> Operation performed successfully.</li>
     <li>63 -> Scripts not found</li>
     <li>36 -> Dependencies not installed (try installing Git etc.)</li>
     <li>24 -> User Exited</li>
