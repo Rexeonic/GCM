@@ -39,19 +39,19 @@ check_config() {
     local key1=$2
 
     # Test (after testing remove comments)
-   # key=`git config --get "${key}"`
-   # key1=`git config --get "${key1}"`
+    key=`git config --get "${key}"`
+    key1=`git config --get "${key1}"`
 
-    key=''  # after testing, delete this line
-    key1='' # after testing, delete this line
+    # if any 1 or both keys are empty, run login-menu
     if [ -z "${key}" ] || [ -z "${key1}" ] ; then
 
           echo -n '❌'
           "${HOME}/gcm/scripts/login-menu.sh"
+
+          return ${?}
     else
         	echo -n '✅'
     fi
-    sleep 0.75
 
     return
 }
@@ -91,18 +91,21 @@ check_packages() {
   local packages=${@}
 
 
+  loading_ui '[1m[32mInstalling missing dependencies[0m' '0.5' '.'
+
   # While checks if we're at last package provided
   while [[ "${#}" -ne 0 ]]; do
 
-    "${1}" --version &>/dev/null
+    "${1}" --version &>/dev/null # check if package is installed
 
-    if [[ ${?} -ne 0 ]]; then
+    if [ ${?} -ne 0 ]; then # if not installed then
 
-      echo "Installing ${1}"
-      sudo apt install "${1}"
+      echo "[37;42mInstalling ${1}[0m"
+      sudo "$(package_manager)" install "${1}"
 
       if [ "${?}" -ne 0 ]; then
-        echo "[31mError[0m: [1mgit[0m cann't be installed"
+        echo "[31mError[0m: [1m${1}[0m cann't be installed"
+        echo "[44mTry to manually instally the package [1m${1}[0m"
         exit 36
       fi
     fi
@@ -113,3 +116,22 @@ check_packages() {
   return
 }
 
+package_manager() {
+
+  # This function checks which distribution user's on 
+  # i.e uses either apt, dnf, pkg or yum etc.
+
+  if command -v apt &>/dev/null; then
+    echo "apt"
+  elif command -v dnf &>/dev/null; then
+    echo "dnf"
+  elif command -v yum &>/dev/null; then
+    echo "yum"
+  elif command -v pacman &>/dev/null; then
+    echo "pacman"
+  else
+    warning 'library [package_manager] :' 'package manager cannot be determined'
+  fi
+
+  return
+}
