@@ -17,11 +17,9 @@ local_config() {
   ( : )
 }
 
-#check_config 'user.name' 'user.email'
 
-"${HOME}/gcm/scripts/login-menu.sh"
-if [ "${?}" -eq 24]; then # user trying to exit
-  exit 24
-fi
+check_config 'user.name' 'user.email' # checks for basic Author info
+
+
 # Project Setted-up Successfully
 exit 0
