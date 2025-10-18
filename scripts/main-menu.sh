@@ -1,7 +1,7 @@
 #!/bin/bash
 
 <<COMMENT_BLOCK
-  1. Draws basic gui
+  1. Draws basic tui
   2. provides option for various operations.
     a) Setup a Project
     b) Pulling Updates
@@ -11,8 +11,8 @@
 
 COMMENT_BLOCK
 
-if [ -f "${HOME}/gcm/scripts/library.sh" ]; then
-  . "${HOME}/gcm/scripts/library.sh"
+if [ -x "${HOME}/GCM/scripts/library.sh" ]; then
+  . "${HOME}/GCM/scripts/library.sh"
 fi
 
 main-menu() {
@@ -36,25 +36,25 @@ while [ 1 ]; do
 
   case ${option} in
     1)
-      if [[ -x "${HOME}/gcm/main/setup.sh" ]]; then
-        "${HOME}/gcm/main/setup.sh"
+      if [[ -x "${HOME}/GCM/main/setup.sh" ]]; then
+        "${HOME}/GCM/main/setup.sh"
       else
         # error 'Error message' 'errro code'
         error 'msg' "${?}"
       fi
       break;;
     2)
-      if [[ -x "${HOME}/gcm/main/run-update.sh" ]]; then
-        "${HOME}/gcm/main/run-update.sh"
+      if [[ -x "${HOME}/GCM/main/run-update.sh" ]]; then
+        "${HOME}/GCM/main/run-update.sh"
       else
         # error 'Error message' 'errro code'
         error 'msg' "${?}"
       fi
       break;;
     3)
-      if [[ -x "${HOME}/gcm/main/config-manager.sh" ]]; then
+      if [[ -x "${HOME}/GCM/main/config-manager.sh" ]]; then
 
-        "${HOME}/gcm/main/config-manager.sh"
+        "${HOME}/GCM/main/config-manager.sh"
 
       else
 

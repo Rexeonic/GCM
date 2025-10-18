@@ -11,8 +11,8 @@
 COMMENT_BLOCK
 
 # Sourcing functions from library
-if [ -f "${HOME}/gcm/scripts/library.sh" ]; then
-  . "${HOME}/gcm/scripts/library.sh"
+if [ -x "${HOME}/GCM/scripts/library.sh" ]; then
+  . "${HOME}/GCM/scripts/library.sh"
 fi
 # Source Block End
 

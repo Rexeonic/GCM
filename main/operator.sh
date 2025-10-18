@@ -10,9 +10,9 @@ echo 'Loading Menu'
 # main loop
 while [ 1 ]; do
 
-  if [[ -x "${HOME}/gcm/scripts/main-menu.sh" ]]; then
+  if [[ -x "${HOME}/GCM/scripts/main-menu.sh" ]]; then
 
-      "${HOME}/gcm/scripts/main-menu.sh"
+      "${HOME}/GCM/scripts/main-menu.sh"
 
       # If user wants to exit, exit the program
       if [ "${?}" -eq 24 ]; then

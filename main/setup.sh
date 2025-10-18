@@ -5,8 +5,8 @@
 
 COMMENT_BLOCK
 
-if [[ -x "${HOME}/gcm/scripts/library.sh" ]]; then
-  . "${HOME}/gcm/scripts/library.sh"
+if [[ -x "${HOME}/GCM/scripts/library.sh" ]]; then
+  . "${HOME}/GCM/scripts/library.sh"
 fi
 
 clone() {
@@ -18,6 +18,7 @@ local_config() {
 }
 
 
+# refer to scripts/library.sh to see function implementation
 check_config 'user.name' 'user.email' # checks for basic Author info
 
 

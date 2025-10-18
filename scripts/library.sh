@@ -1,13 +1,25 @@
 #!/bin/bash
 
 <<COMMENT_BLOCK
+  TITLE : library.sh
+  DESCRIPTION :
 
+    This library is accessed by various scripts
+    in GCM plug-in. You will find implementation
+    of function used in scripts.
+
+  LINK :
+    > github : https://github.com/Rexeonic/GCM
 
 COMMENT_BLOCK
 
 
 # Function responsible for basic waiting graphics
 loading_ui() {
+
+    # draw provide symbol or char
+    # at given intervals to mimic
+    # GUI behaviour
 
     local text=$1	# message to be displayed
     local time=$2	# timeout for writing patterns
@@ -46,11 +58,14 @@ check_config() {
     if [ -z "${key}" ] || [ -z "${key1}" ] ; then
 
           echo -n '❌'
-          "${HOME}/gcm/scripts/login-menu.sh"
+          "${HOME}/GCM/scripts/login-menu.sh"
 
           return ${?}
     else
         	echo -n '✅'
+
+          #Prompt to go with previous config or change it.
+            # develop the pending feature
     fi
 
     return
@@ -74,13 +89,9 @@ warning() {
   local info=$2
   local warning=`echo -e "\t "${1}" \n "${2}" "` # output to be displayed
 
-  dialog --cursor-off-label --msgbox "${warning}" 8 40 \
-         --clear
-
-  #if [[ "${?}" -eq 0 ]]; then
-  #
-  #  dialog --clear
-  #fi
+  dialog --cursor-off-label \
+         --clear \
+         --msgbox "${warning}" 8 40
 
   return
 }
@@ -94,23 +105,23 @@ check_packages() {
   loading_ui '[1m[32mInstalling missing dependencies[0m' '0.5' '.'
 
   # While checks if we're at last package provided
-  while [[ "${#}" -ne 0 ]]; do
+  while [[ "${#}" -gt 0 ]]; do
 
     "${1}" --version &>/dev/null # check if package is installed
 
     if [ ${?} -ne 0 ]; then # if not installed then
 
       echo "[37;42mInstalling ${1}[0m"
-      sudo "$(package_manager)" install "${1}"
+      sudo "$(package_manager)" install "${1}" 2>/dev/null  # suppress error messages
 
       if [ "${?}" -ne 0 ]; then
         echo "[31mError[0m: [1m${1}[0m cann't be installed"
-        echo "[44mTry to manually instally the package [1m${1}[0m"
+        echo "[44mTry to manually install the package [1m${1}[0m"
         exit 36
       fi
     fi
 
-    shift
+    shift # shifts first argument from the arguments passed
   done
 
   return
@@ -118,7 +129,7 @@ check_packages() {
 
 package_manager() {
 
-  # This function checks which distribution user's on 
+  # This function checks which distribution user's on
   # i.e uses either apt, dnf, pkg or yum etc.
 
   if command -v apt &>/dev/null; then

@@ -6,9 +6,12 @@
 COMMENT_BLOCK
 
 # source library.sh file
-if [ -x "${HOME}/gcm/scripts/library.sh" ]; then
-  . "${HOME}/gcm/scripts/library.sh"
+if [ -x "${HOME}/GCM/scripts/library.sh" ]; then
+  . "${HOME}/GCM/scripts/library.sh"
 fi
+
+# checks if bash can intrepret the script
+bash -n "${HOME}/GCM/scripts/library.sh"
 
 # check_packages is being checked with different packages
 check_packages 'python3.11'

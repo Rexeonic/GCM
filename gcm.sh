@@ -11,8 +11,8 @@
 comment_block
 
 # Sourcing library
-if [ -f "${HOME}/gcm/scripts/library.sh" ]; then
-  . "${HOME}/gcm/scripts/library.sh"
+if [ -x "${HOME}/GCM/scripts/library.sh" ]; then
+  . "${HOME}/GCM/scripts/library.sh"
 fi
 # Sourcing Block
 
@@ -25,7 +25,7 @@ loading_ui 'Running gcm by Rexeonic' '0.5' '.'
 echo
 
 loading_ui 'Loading Modules' '0.5' '✅'
-if [ -x "${HOME}/gcm/main/operator.sh" ]; then
+if [ -x "${HOME}/GCM/main/operator.sh" ]; then
 
   echo "[32mAll Operators Loaded Successfully[0m"
 fi
@@ -53,7 +53,7 @@ echo
 
 # Run the operator.sh script
 {
-  ( ${HOME}/gcm/main/operator.sh )
+  ( ${HOME}/GCM/main/operator.sh )
 }
 
 # Operation Completed (Successfully)
